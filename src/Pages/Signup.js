@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Firebase, { auth } from "../Firebase";
-
 const Signup = () => {
   const [obj, setobj] = useState({});
+  const [btndisable, setbtndisable] = useState(false);
   const d = new Date();
   const date = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
 
@@ -21,6 +21,7 @@ const Signup = () => {
   async function Submit(e) {
     try {
       e.preventDefault();
+      setbtndisable(true);
       if (!obj.Name || !obj.Email || !obj.Password || !obj.ConfirmPassword)
         return alert("Field is Empty");
       const response = EmailCheck(obj.Email);
@@ -28,27 +29,25 @@ const Signup = () => {
       if (obj.Password !== obj.ConfirmPassword)
         return alert("Password not matched");
 
+      const object = {
+        Name: obj.Name,
+        Email: obj.Email,
+      };
       const result = await auth.createUserWithEmailAndPassword(
         obj.Email,
         obj.Password
       );
-      let object = {
-        Name: obj.Name,
-        Email: obj.Email,
-      };
-      if (!object) return alert("Field is Empty");
+      setobj({});
       Firebase.child("Users")
         .child(result.user.uid)
         .set(object, (err) => {
-          if (err) return alert("Something Went Wrong. Try again later");
-          else {
-            setobj({});
-            object = null;
-            return alert("Account Created Successfully");
-          }
+          if (err) return alert("Something Went Wrong. Try Again later.");
+          else return alert("Account Created Successfully");
         });
     } catch (error) {
       return alert("Account related to this Email is already exist.");
+    } finally {
+      setbtndisable(false);
     }
   }
   return (
@@ -94,10 +93,10 @@ const Signup = () => {
             </div>
             <div className="form-group">
               <input
-                type="email"
                 name="Email"
                 value={obj.Email ? obj.Email : ""}
                 onChange={set}
+                type="email"
                 placeholder="Email Address"
               />
             </div>
@@ -120,6 +119,7 @@ const Signup = () => {
               />
             </div>
             <button
+              disabled={btndisable}
               type="submit"
               onClick={Submit}
               className="btn-two w-100 d-block"
