@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
 const AddBlogComp = () => {
+  const [obj, setobj] = useState({});
+  const [inputs, setinputs] = useState([]);
+  const set = (event) => {
+    setobj({ ...obj, [event.target.name]: event.target.value });
+  };
+  const Create = () => {
+    setinputs((inputs) => [...inputs, { id: inputs.length + 1 }]);
+  };
+  const radiocheck = (event) => {
+    setobj({ ...obj, Status: event.target.id });
+  };
+  const set1 = (event, Obj, index) => {
+    const result = { ...Obj, [event.target.name]: event.target.value };
+    inputs.splice(index, 1, result);
+    setinputs([...inputs]);
+
+    // inputs.filter(object=>{ return object.id==Obj.id})
+
+    //    const response= inputs.filter(object=>object.id==Obj.id)
+    //     console.log(response);
+  };
   return (
     <div>
       <div className="checkout-wrap ptb-100">
@@ -17,7 +38,9 @@ const AddBlogComp = () => {
                       <input
                         type="text"
                         name="Title"
-                        placeholder="Title"
+                        value={obj.Title ? obj.Title : ""}
+                        onChange={set}
+                        placeholder="Enter your Title"
                         required
                       />
                     </div>
@@ -27,7 +50,9 @@ const AddBlogComp = () => {
                       <input
                         type="text"
                         name="Author"
-                        placeholder="Author Name"
+                        value={obj.Author ? obj.Author : ""}
+                        onChange={set}
+                        placeholder="Enter the Author Name"
                         required
                       />
                     </div>
@@ -37,7 +62,9 @@ const AddBlogComp = () => {
                       <input
                         type="text"
                         name="Heading"
-                        placeholder="Heading"
+                        value={obj.Heading ? obj.Heading : ""}
+                        onChange={set}
+                        placeholder="Enter the Heading"
                         required
                       />
                     </div>
@@ -46,94 +73,118 @@ const AddBlogComp = () => {
                     <div className="form-group">
                       <textarea
                         name="Description"
-                        placeholder="Description"
+                        value={obj.Description ? obj.Description : ""}
+                        onChange={set}
+                        placeholder="Enter the Description"
                         id=""
                       ></textarea>
                     </div>
                   </div>
-                  <div className="col-lg-12">
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        name="company_name"
-                        id="company_name"
-                        placeholder="Company Name"
-                      />
-                    </div>
-                  </div>
-
-                  <button> Create Sub-Heading</button>
                   <div className="col-lg-6">
                     <div className="form-group">
                       <input
                         type="text"
-                        name="Sub Heading"
-                        placeholder="Sub Heading"
+                        name="Category"
+                        value={obj.Category ? obj.Category : ""}
+                        onChange={set}
+                        placeholder="Enter your Category"
                       />
                     </div>
                   </div>
                   <div className="col-lg-6">
                     <div className="form-group">
-                      <input
-                        type="text"
-                        name="Sub Heading Description"
-                        placeholder="Sub Heading Description"
-                      />
+                      <a className="btn-two w-100 d-block">
+                        Upload Heading Image
+                        <i className="flaticon-right-arrow" />
+                      </a>
                     </div>
                   </div>
-                  <div className="col-lg-12">
+                  <div className="col-lg-6">
                     <div className="form-group">
                       <input
                         type="text"
-                        name="zip"
-                        id="zip"
-                        placeholder="ZIP Code"
-                        required
+                        name="Tags"
+                        value={obj.Tags ? obj.Tags : ""}
+                        onChange={set}
+                        placeholder="Enter your Tags"
                       />
                     </div>
                   </div>
-                  <div className="col-lg-12">
-                    <div className="d-flex align-items-center">
-                      <div className="checkbox style-two form-group me-5">
-                        <input type="checkbox" id="test_3" />
-                        <label htmlFor="test_3">Create An Account</label>
-                      </div>
-                      <div className="checkbox style-two form-group">
-                        <input type="checkbox" id="test_3" />
-                        <label htmlFor="test_3">
-                          Ship To A Different Address?
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-12">
+                  <div className="col-lg-6">
                     <div className="form-group">
-                      <textarea
-                        name="msg"
-                        id="msg"
-                        cols={30}
-                        rows={10}
-                        placeholder="Order Note"
-                        defaultValue={""}
-                      />
+                      <a className="btn-two w-100 d-block" onClick={Create}>
+                        Create Sub-Heading
+                        <i className="flaticon-right-arrow" />
+                      </a>
                     </div>
                   </div>
+                  {inputs.map(function (input, index) {
+                    return (
+                      <div className="row" key={index}>
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <input
+                              type="text"
+                              name="Sub_Heading"
+                              onChange={(e) => set1(e, input, index)}
+                              placeholder={`Enter the Sub Heading-${input.id}`}
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-6">
+                          <div className="form-group">
+                            <input
+                              type="text"
+                              name="Sub_Heading_Description"
+                              onChange={(e) => set1(e, input, index)}
+                              placeholder={`Enter the Sub Heading Description-${input.id}`}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                   <div className="col-lg-12">
-                    <div className="checkbox style2">
-                      <input type="checkbox" id="test_10" />
-                      <label htmlFor="test_10">
-                        I have read And Accept the{" "}
-                        <a className="link style1" href="terms-conditions.html">
-                          {" "}
-                          Terms &amp; Conditions
-                        </a>
-                      </label>
+                    <div
+                      className="checkout-box"
+                      style={{ backgroundColor: "transparent" }}
+                    >
+                      <div className="checkout-details">
+                        <div className="bill-details">
+                          <div
+                            style={{ display: "flex", flexWrap: "nowrap" }}
+                            className="select-payment-method mt-20"
+                          >
+                            <div>
+                              <span style={{ fontSize: "20px" }}>Status:</span>
+                            </div>
+                            <div>
+                              <input
+                                type="radio"
+                                onClick={radiocheck}
+                                id="Active"
+                                name="Status"
+                              />
+                              <label htmlFor="Active">Active</label>
+                            </div>
+                            <div>
+                              <input
+                                type="radio"
+                                onClick={radiocheck}
+                                id="In-Active"
+                                name="Status"
+                              />
+                              <label htmlFor="In-Active">In-Active</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="col-lg-12 mt-4">
                     <div className="form-group mb-0">
-                      <button type="button" className="btn-one">
-                        Save Information
+                      <button type="submit" className="btn-one">
+                        Submit
                         <i className="flaticon-right-arrow" />
                       </button>
                     </div>

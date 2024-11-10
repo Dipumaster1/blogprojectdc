@@ -21,12 +21,12 @@ const AdminHeader = () => {
             <Link className="navbar-brand" to="/">
               <img
                 className="logo-light"
-                src="../assets/img/logo-white.png"
+                src="../assets/img/Blogimg1.png"
                 alt="logo"
               />
               <img
                 className="logo-dark"
-                src="../assets/img/logo-white.png"
+                src="../assets/img/Blogimg1.png"
                 alt="logo"
               />
             </Link>

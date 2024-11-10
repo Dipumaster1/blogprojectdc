@@ -34,6 +34,9 @@ const Login = () => {
       setbtndisable(false);
     }
   }
+  function follow() {
+    navigate("/Signup");
+  }
   return (
     <div className="login-wrap">
       <div className="login-bg">
@@ -111,7 +114,7 @@ const Login = () => {
               Login
             </button>
             <p className="login-text">
-              Don't have an account?<a href="signup.html">Sign Up</a>
+              Don't have an account?<a onClick={follow}>Sign Up</a>
             </p>
           </form>
         </div>
