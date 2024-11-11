@@ -14,6 +14,7 @@ import AddBlog from "./Admin/AdminPages/AddBlog";
 import BlogShow from "./Admin/AdminPages/BlogShow";
 import MyAccount from "./Admin/AdminPages/MyAccount";
 import AdminBlogDetail from "./Admin/AdminPages/AdminBlogDetail";
+import "./style.css";
 
 const App = () => {
   return (
