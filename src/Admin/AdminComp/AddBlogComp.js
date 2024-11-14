@@ -1,10 +1,12 @@
 import React, { useRef, useState } from "react";
+import Firebase, { storage } from "../../Firebase";
 
 const AddBlogComp = () => {
   const [obj, setobj] = useState({});
   const [inputs, setinputs] = useState([]);
   const [headingimage, setheadingimage] = useState(null);
   const [images, setimages] = useState([]);
+  const [btndisable, setbtndisable] = useState(false);
   const [imageserror, setimageserror] = useState(null);
   const image = useRef();
   const multipleimage = useRef();
@@ -80,23 +82,70 @@ const AddBlogComp = () => {
     images.splice(index, 1);
     setimages([...images]);
   }
-  function Submit(e) {
+  async function Submit(e) {
     e.preventDefault();
-    if (
-      !obj.Title ||
-      !obj.Heading ||
-      !obj.Author ||
-      !obj.Description ||
-      !obj.Category ||
-      !obj.Tags ||
-      !obj.Status
-    )
-      return alert("Field is Empty");
+    try {
+      setbtndisable(true);
+      if (
+        !obj.Author ||
+        !obj.Category ||
+        !obj.Description ||
+        !obj.Heading ||
+        !obj.Tags ||
+        !obj.Title ||
+        !obj.Status
+      )
+        return alert("Field is Empty");
+      if (!headingimage) return alert("Upload heading image first");
 
-    if (!headingimage) return alert("Upload heading image first");
+      let count = 0;
+      for (let i = 0; i < inputs.length; i++) {
+        if (!inputs[i].Sub_Heading || !inputs[i].Sub_Heading_Description) {
+          count++;
+        }
+      }
+      if (count > 0) return alert("Some Field are empty in Sub-Heading Part.");
 
-    if (images.length !== 0) {
-      console.log(images);
+      // saving heading image storage
+
+      const fileRef = storage.child(headingimage.name);
+      await fileRef.put(headingimage);
+      const url = await fileRef.getDownloadURL();
+      const path = fileRef.fullPath;
+      const headobject = { url, path };
+
+      let mydata = {
+        ...obj,
+        HeadingImage: headobject,
+        SubHeadingsData: inputs,
+      };
+
+      // additional images (optional)
+
+      if (images.length > 0) {
+        let myarray = [];
+        for (let j = 0; j < images.length; j++) {
+          const fileRefs = storage.child(images[j].name);
+          await fileRefs.put(images[j]);
+          const urls = await fileRefs.getDownloadURL();
+          const paths = fileRefs.fullPath;
+          myarray.push({ urls, paths });
+        }
+        mydata = { ...mydata, Images: myarray };
+      }
+
+      Firebase.child("Blogs").push(mydata, (err) => {
+        if (err) return alert("Something went wrong. Try again later");
+        else return alert("Blog Uploaded");
+      });
+    } catch (error) {
+      return alert("Something Went Wrong. Try again later");
+    } finally {
+      setobj({});
+      setheadingimage(null);
+      setimages([]);
+      setinputs([]);
+      setbtndisable(false);
     }
   }
   return (
@@ -265,6 +314,7 @@ const AddBlogComp = () => {
                     <div className="form-group mb-0">
                       <button
                         type="submit"
+                        disabled={btndisable}
                         onClick={Submit}
                         className="btn-one"
                       >
@@ -344,7 +394,7 @@ const AddBlogComp = () => {
                           textAlign: "center",
                         }}
                       >
-                        {imageserror + " images aren't of required type."}
+                        {imageserror + " files are not of image type."}
                       </p>
                     ) : (
                       ""
