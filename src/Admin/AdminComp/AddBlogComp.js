@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import Firebase, { storage } from "../../Firebase";
+import { useNavigate } from "react-router-dom";
 
 const AddBlogComp = () => {
   const [obj, setobj] = useState({});
@@ -7,9 +8,11 @@ const AddBlogComp = () => {
   const [headingimage, setheadingimage] = useState(null);
   const [images, setimages] = useState([]);
   const [btndisable, setbtndisable] = useState(false);
+  const [loader, setloader] = useState(false);
   const [imageserror, setimageserror] = useState(null);
   const image = useRef();
   const multipleimage = useRef();
+  const navigate = useNavigate();
   const set = (event) => {
     setobj({ ...obj, [event.target.name]: event.target.value });
   };
@@ -86,6 +89,7 @@ const AddBlogComp = () => {
     e.preventDefault();
     try {
       setbtndisable(true);
+      setloader(true);
       if (
         !obj.Author ||
         !obj.Category ||
@@ -105,6 +109,13 @@ const AddBlogComp = () => {
         }
       }
       if (count > 0) return alert("Some Field are empty in Sub-Heading Part.");
+
+      const user = JSON.parse(localStorage.getItem("Users"));
+      if (!user) {
+        alert("Unauthorised user");
+        window.history.replaceState(null, null, "/Login");
+        return navigate("/", { replace: true });
+      }
 
       // saving heading image storage
 
@@ -134,10 +145,13 @@ const AddBlogComp = () => {
         mydata = { ...mydata, Images: myarray };
       }
 
-      Firebase.child("Blogs").push(mydata, (err) => {
-        if (err) return alert("Something went wrong. Try again later");
-        else return alert("Blog Uploaded");
-      });
+      Firebase.child("Blogs")
+        .child(user)
+        .push(mydata, (err) => {
+          if (err) return alert("Something went wrong. Try again later");
+          else return alert("Blog Uploaded");
+        });
+      setTimeout(() => navigate("/Blogs"), 1500);
     } catch (error) {
       return alert("Something Went Wrong. Try again later");
     } finally {
@@ -146,12 +160,18 @@ const AddBlogComp = () => {
       setimages([]);
       setinputs([]);
       setbtndisable(false);
+      setloader(false);
     }
   }
   return (
     <div>
       <div className="checkout-wrap ptb-100">
         <div className="container">
+          {loader && (
+            <div className="preloaders">
+              <div className="loaders"></div>
+            </div>
+          )}
           <div className="row">
             <div className="col-xxl-8 col-xl-7 col-lg-7">
               <form action="#" className="checkout-form">
@@ -242,6 +262,7 @@ const AddBlogComp = () => {
                               <input
                                 type="radio"
                                 onClick={radiocheck}
+                                checked={obj.Status === "Active" ? true : false}
                                 id="Active"
                                 name="Status"
                               />
@@ -251,6 +272,9 @@ const AddBlogComp = () => {
                               <input
                                 type="radio"
                                 onClick={radiocheck}
+                                checked={
+                                  obj.Status === "In-Active" ? true : false
+                                }
                                 id="In-Active"
                                 name="Status"
                               />
@@ -268,7 +292,7 @@ const AddBlogComp = () => {
                         name="Tags"
                         value={obj.Tags ? obj.Tags : ""}
                         onChange={set}
-                        placeholder="Enter your Tags"
+                        placeholder="Enter your Tags separated (,)."
                       />
                     </div>
                   </div>

@@ -21,12 +21,12 @@ const AdminHeader = () => {
             <Link className="navbar-brand" to="/">
               <img
                 className="logo-light"
-                src="../assets/img/Blogimg1.png"
+                src="../assets/img/logo-white.png"
                 alt="logo"
               />
               <img
                 className="logo-dark"
-                src="../assets/img/Blogimg1.png"
+                src="../assets/img/logo-white.png"
                 alt="logo"
               />
             </Link>
@@ -46,17 +46,17 @@ const AdminHeader = () => {
             <div className="collapse navbar-collapse">
               <ul className="navbar-nav mx-auto">
                 <li className="nav-item">
-                  <Link to={"/Blogs"} className="nav-link active">
+                  <Link to={"/Admin"} className="nav-link active">
                     Our Blogs
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={"/AddBlog"} className="nav-link">
+                  <Link to={"/Admin/AddBlog"} className="nav-link">
                     Add Blog
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={"/MyAccount"} className="nav-link">
+                  <Link to={"/Admin/MyAccount"} className="nav-link">
                     My Account
                   </Link>
                 </li>

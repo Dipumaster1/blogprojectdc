@@ -27,15 +27,12 @@ const Login = () => {
       );
       localStorage.setItem("Users", JSON.stringify(result.user.uid));
       setobj({});
-      navigate("/Blogs");
+      navigate("/Admin");
     } catch (error) {
       return alert("Invalid Credentials");
     } finally {
       setbtndisable(false);
     }
-  }
-  function follow() {
-    navigate("/Signup");
   }
   return (
     <div className="login-wrap">
@@ -114,7 +111,7 @@ const Login = () => {
               Login
             </button>
             <p className="login-text">
-              Don't have an account?<a onClick={follow}>Sign Up</a>
+              Don't have an account?<a href="signup.html">Sign Up</a>
             </p>
           </form>
         </div>
