@@ -13,8 +13,9 @@ const AddBlogComp = () => {
   const image = useRef();
   const multipleimage = useRef();
   const navigate = useNavigate();
+  const date = new Date();
   const set = (event) => {
-    setobj({ ...obj, [event.target.name]: event.target.value });
+    setobj({ ...obj, [event.target.name]: event.target.value, Date: date });
   };
   const Create = () => {
     setinputs((inputs) => [...inputs, { id: inputs.length + 1 }]);
@@ -151,7 +152,7 @@ const AddBlogComp = () => {
           if (err) return alert("Something went wrong. Try again later");
           else return alert("Blog Uploaded");
         });
-      setTimeout(() => navigate("/Blogs"), 1500);
+      setTimeout(() => navigate("/Admin/Blogs"), 1500);
     } catch (error) {
       return alert("Something Went Wrong. Try again later");
     } finally {
@@ -292,7 +293,7 @@ const AddBlogComp = () => {
                         name="Tags"
                         value={obj.Tags ? obj.Tags : ""}
                         onChange={set}
-                        placeholder="Enter your Tags separated (,)."
+                        placeholder="Enter your Tags separated by comma (,)."
                       />
                     </div>
                   </div>

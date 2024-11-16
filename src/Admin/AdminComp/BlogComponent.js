@@ -1,254 +1,48 @@
 import React from "react";
 
-const BlogComponent = () => {
+const BlogComponent = (props) => {
   return (
     <div className="sports-wrap ptb-100">
       <div className="container">
         <div className="row gx-55 gx-5">
           <div className="col-lg-8">
             <div className="row justify-content-center">
-              <div className="col-xl-6 col-lg-6 col-md-6">
-                <div className="news-card-thirteen">
-                  <div className="news-card-img">
-                    <img
-                      src="assets/img/news/politics/politics-7.webp"
-                      alt="Iamge"
-                    />
-                    <a href="business.html" className="news-cat">
-                      Politics
-                    </a>
-                  </div>
-                  <div className="news-card-info">
-                    <h3>
-                      <a href="business-details.html">
-                        The Political Landscape: Navigating Power And Policy
-                      </a>
-                    </h3>
-                    <ul className="news-metainfo list-style">
-                      <li>
-                        <i className="fi fi-rr-calendar-minus" />
-                        <a href="news-by-date.html">Feb 27, 2024</a>
-                      </li>
-                      <li>
-                        <i className="fi fi-rr-clock-three" />
-                        15 Min Read
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-6 col-md-6">
-                <div className="news-card-thirteen">
-                  <div className="news-card-img">
-                    <img
-                      src="assets/img/news/politics/politics-8.webp"
-                      alt="Iamge"
-                    />
-                    <a href="business.html" className="news-cat">
-                      Politics
-                    </a>
-                  </div>
-                  <div className="news-card-info">
-                    <h3>
-                      <a href="business-details.html">
-                        Navigating the Political Sphere: Insights and Analysis
-                      </a>
-                    </h3>
-                    <ul className="news-metainfo list-style">
-                      <li>
-                        <i className="fi fi-rr-calendar-minus" />
-                        <a href="news-by-date.html">Feb 27, 2024</a>
-                      </li>
-                      <li>
-                        <i className="fi fi-rr-clock-three" />
-                        15 Min Read
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-6 col-md-6">
-                <div className="news-card-thirteen">
-                  <div className="news-card-img">
-                    <img
-                      src="assets/img/news/politics/politics-9.webp"
-                      alt="Iamge"
-                    />
-                    <a href="business.html" className="news-cat">
-                      Politics
-                    </a>
-                  </div>
-                  <div className="news-card-info">
-                    <h3>
-                      <a href="business-details.html">
-                        Ex-fifa Officials latini Acquitted Of Fraud Charges
-                      </a>
-                    </h3>
-                    <ul className="news-metainfo list-style">
-                      <li>
-                        <i className="fi fi-rr-calendar-minus" />
-                        <a href="news-by-date.html">Feb 27, 2024</a>
-                      </li>
-                      <li>
-                        <i className="fi fi-rr-clock-three" />
-                        15 Min Read
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-6 col-md-6">
-                <div className="news-card-thirteen">
-                  <div className="news-card-img">
-                    <img
-                      src="assets/img/news/politics/politics-10.webp"
-                      alt="Iamge"
-                    />
-                    <a href="business.html" className="news-cat">
-                      Politics
-                    </a>
-                  </div>
-                  <div className="news-card-info">
-                    <h3>
-                      <a href="business-details.html">
-                        How Is Technology Changing Treatment Of Injuries?
-                      </a>
-                    </h3>
-                    <ul className="news-metainfo list-style">
-                      <li>
-                        <i className="fi fi-rr-calendar-minus" />
-                        <a href="news-by-date.html">Feb 27, 2024</a>
-                      </li>
-                      <li>
-                        <i className="fi fi-rr-clock-three" />
-                        15 Min Read
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-6 col-md-6">
-                <div className="news-card-thirteen">
-                  <div className="news-card-img">
-                    <img
-                      src="assets/img/news/politics/politics-11.webp"
-                      alt="Iamge"
-                    />
-                    <a href="business.html" className="news-cat">
-                      Politics
-                    </a>
-                  </div>
-                  <div className="news-card-info">
-                    <h3>
-                      <a href="business-details.html">
-                        Meet The Final Three Teams To Qualify For The 2023 World
-                        Cup
-                      </a>
-                    </h3>
-                    <ul className="news-metainfo list-style">
-                      <li>
-                        <i className="fi fi-rr-calendar-minus" />
-                        <a href="news-by-date.html">Feb 27, 2024</a>
-                      </li>
-                      <li>
-                        <i className="fi fi-rr-clock-three" />
-                        15 Min Read
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-6 col-md-6">
-                <div className="news-card-thirteen">
-                  <div className="news-card-img">
-                    <img
-                      src="assets/img/news/politics/politics-12.webp"
-                      alt="Iamge"
-                    />
-                    <a href="business.html" className="news-cat">
-                      Politics
-                    </a>
-                  </div>
-                  <div className="news-card-info">
-                    <h3>
-                      <a href="business-details.html">
-                        Cyclist Out Of Giro D'italia After Injuring Eye With
-                        Prosecco Cork
-                      </a>
-                    </h3>
-                    <ul className="news-metainfo list-style">
-                      <li>
-                        <i className="fi fi-rr-calendar-minus" />
-                        <a href="news-by-date.html">Feb 27, 2024</a>
-                      </li>
-                      <li>
-                        <i className="fi fi-rr-clock-three" />
-                        15 Min Read
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-6 col-md-6">
-                <div className="news-card-thirteen">
-                  <div className="news-card-img">
-                    <img
-                      src="assets/img/news/politics/politics-13.webp"
-                      alt="Iamge"
-                    />
-                    <a href="business.html" className="news-cat">
-                      Politics
-                    </a>
-                  </div>
-                  <div className="news-card-info">
-                    <h3>
-                      <a href="business-details.html">
-                        Qatar World Cup: Fans Must Show Negative Covid-19 Result
-                      </a>
-                    </h3>
-                    <ul className="news-metainfo list-style">
-                      <li>
-                        <i className="fi fi-rr-calendar-minus" />
-                        <a href="news-by-date.html">Feb 27, 2024</a>
-                      </li>
-                      <li>
-                        <i className="fi fi-rr-clock-three" />
-                        15 Min Read
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-6 col-lg-6 col-md-6">
-                <div className="news-card-thirteen">
-                  <div className="news-card-img">
-                    <img
-                      src="assets/img/news/politics/politics-14.webp"
-                      alt="Iamge"
-                    />
-                    <a href="business.html" className="news-cat">
-                      Politics
-                    </a>
-                  </div>
-                  <div className="news-card-info">
-                    <h3>
-                      <a href="business-details.html">
-                        Joe Gibbs Discusses Ty Gibbs Incident At Martinsville
-                      </a>
-                    </h3>
-                    <ul className="news-metainfo list-style">
-                      <li>
-                        <i className="fi fi-rr-calendar-minus" />
-                        <a href="news-by-date.html">Feb 27, 2024</a>
-                      </li>
-                      <li>
-                        <i className="fi fi-rr-clock-three" />
-                        15 Min Read
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              {props.data &&
+                Object.keys(props.data).map(function (key, index) {
+                  // console.log(props?.data[key]?.Date);
+
+                  return (
+                    <div key={index} className="col-xl-6 col-lg-6 col-md-6">
+                      <div className="news-card-thirteen">
+                        <div className="news-card-img">
+                          <img
+                            loading="lazy"
+                            src={props?.data[key]?.HeadingImage?.url}
+                            alt="Iamge"
+                          />
+                          <a href="#" className="news-cat">
+                            {props?.data[key]?.Category}
+                          </a>
+                        </div>
+                        <div className="news-card-info">
+                          <h3>
+                            <a href="#">{props?.data[key]?.Title}</a>
+                          </h3>
+                          <ul className="news-metainfo list-style">
+                            <li>
+                              <i className="fi fi-rr-calendar-minus" />
+                              <a href="#">Feb 27, 2024</a>
+                            </li>
+                            <li>
+                              <i className="fi fi-rr-user" />
+                              By:-{props?.data[key]?.Author}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
           </div>
           <div className="col-lg-4">
