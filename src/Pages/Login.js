@@ -27,7 +27,7 @@ const Login = () => {
       );
       localStorage.setItem("Users", JSON.stringify(result.user.uid));
       setobj({});
-      navigate("/Admin");
+      navigate("/Blogs");
     } catch (error) {
       return alert("Invalid Credentials");
     } finally {

@@ -1,8 +1,8 @@
 import React, { Suspense, useContext } from "react";
 import AdminHeader from "../AdminComp/AdminHeader";
 import AdminFooter from "../AdminComp/AdminFooter";
-import BlogComponent from "../AdminComp/BlogComponent";
 import AdminBlogContext from "../Context/AdminBlogContext";
+const BlogComponent = React.lazy(() => import("../AdminComp/BlogComponent"));
 
 const BlogShow = () => {
   const { fetchblogs, loader } = useContext(AdminBlogContext);

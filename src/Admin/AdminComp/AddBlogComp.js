@@ -13,9 +13,13 @@ const AddBlogComp = () => {
   const image = useRef();
   const multipleimage = useRef();
   const navigate = useNavigate();
-  const date = new Date();
+
   const set = (event) => {
-    setobj({ ...obj, [event.target.name]: event.target.value, Date: date });
+    setobj({
+      ...obj,
+      [event.target.name]: event.target.value,
+      Date: Date.now(),
+    });
   };
   const Create = () => {
     setinputs((inputs) => [...inputs, { id: inputs.length + 1 }]);
@@ -152,7 +156,7 @@ const AddBlogComp = () => {
           if (err) return alert("Something went wrong. Try again later");
           else return alert("Blog Uploaded");
         });
-      setTimeout(() => navigate("/Admin/Blogs"), 1500);
+      setTimeout(() => navigate("/Blogs"), 1500);
     } catch (error) {
       return alert("Something Went Wrong. Try again later");
     } finally {
@@ -187,7 +191,7 @@ const AddBlogComp = () => {
                         name="Title"
                         value={obj.Title ? obj.Title : ""}
                         onChange={set}
-                        placeholder="Enter your Title"
+                        placeholder="Enter Title"
                         required
                       />
                     </div>
@@ -222,7 +226,7 @@ const AddBlogComp = () => {
                         name="Description"
                         value={obj.Description ? obj.Description : ""}
                         onChange={set}
-                        placeholder="Enter the Description"
+                        placeholder="Enter Description"
                         id=""
                       ></textarea>
                     </div>
@@ -234,7 +238,7 @@ const AddBlogComp = () => {
                         name="Category"
                         value={obj.Category ? obj.Category : ""}
                         onChange={set}
-                        placeholder="Enter your Category"
+                        placeholder="Enter Category"
                       />
                     </div>
                   </div>
@@ -263,6 +267,7 @@ const AddBlogComp = () => {
                               <input
                                 type="radio"
                                 onClick={radiocheck}
+                                readOnly={true}
                                 checked={obj.Status === "Active" ? true : false}
                                 id="Active"
                                 name="Status"
@@ -273,6 +278,7 @@ const AddBlogComp = () => {
                               <input
                                 type="radio"
                                 onClick={radiocheck}
+                                readOnly={true}
                                 checked={
                                   obj.Status === "In-Active" ? true : false
                                 }
@@ -293,7 +299,7 @@ const AddBlogComp = () => {
                         name="Tags"
                         value={obj.Tags ? obj.Tags : ""}
                         onChange={set}
-                        placeholder="Enter your Tags separated by comma (,)."
+                        placeholder="Enter Tags separated by (,)."
                       />
                     </div>
                   </div>
@@ -364,7 +370,7 @@ const AddBlogComp = () => {
                         src={
                           headingimage
                             ? URL.createObjectURL(headingimage)
-                            : "assets/img/newsletter-bg.webp"
+                            : "/assets/img/newsletter-bg.webp"
                         }
                         alt=""
                       />

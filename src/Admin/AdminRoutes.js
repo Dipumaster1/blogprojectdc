@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import AddBlog from "./AdminPages/AddBlog";
-import BlogShow from "./AdminPages/BlogShow";
-import MyAccount from "./AdminPages/MyAccount";
-import AdminBlogDetail from "./AdminPages/AdminBlogDetail";
+import { Outlet, useNavigate } from "react-router-dom";
 import AdminBlogContext from "./Context/AdminBlogContext";
 import Firebase from "../Firebase";
 const AdminRoutes = () => {
@@ -28,12 +24,7 @@ const AdminRoutes = () => {
   }, []);
   return (
     <AdminBlogContext.Provider value={{ fetchblogs: data, loader: loader }}>
-      <Routes>
-        <Route path="AddBlog" element={<AddBlog />} />
-        <Route path="/" element={<BlogShow />} />
-        <Route path="AdminBlogDetail" element={<AdminBlogDetail />} />
-        <Route path="MyAccount" element={<MyAccount />} />
-      </Routes>
+      <Outlet />
     </AdminBlogContext.Provider>
   );
 };

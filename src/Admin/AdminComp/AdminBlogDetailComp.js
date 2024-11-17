@@ -1,6 +1,11 @@
 import React from "react";
 
-const AdminBlogDetailComp = () => {
+const AdminBlogDetailComp = (props) => {
+  function GetDate(date) {
+    if (!date) return "-----";
+    const d = new Date(date);
+    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  }
   return (
     <div className="news-details-wrap ptb-100">
       <div className="container">
@@ -8,177 +13,54 @@ const AdminBlogDetailComp = () => {
           <div className="col-lg-8">
             <article>
               <div className="news-img">
-                <img src="assets/img/news/single-news-3.webp" alt="Image" />
-                <a href="business.html" className="news-cat">
-                  Business
-                </a>
+                <img
+                  loading="lazy"
+                  src={props?.data?.HeadingImage?.url}
+                  alt="Image"
+                />
+                <a className="news-cat">{props?.data?.Category}</a>
               </div>
               <ul className="news-metainfo list-style">
-                <li className="author">
-                  <span className="author-img">
-                    <img
-                      src="assets/img/author/author-thumb-1.webp"
-                      alt="Image"
-                    />
-                  </span>
-                  <a href="author.html">James William</a>
-                </li>
                 <li>
                   <i className="fi fi-rr-calendar-minus" />
-                  <a href="news-by-date.html">Mar 03, 2024</a>
+                  <a>{GetDate(props?.data?.Date)}</a>
                 </li>
                 <li>
-                  <i className="fi fi-rr-clock-three" />
-                  15 Min Read
+                  <i className="fi fi-rr-user" />
+                  {props?.data?.Author}
                 </li>
               </ul>
               <div className="news-para">
-                <h1>
-                  Power and Influence: An Analysis Of The Political Landscape
-                </h1>
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  stand dummy text ever since the 1500s, when an unknown printer
-                  took a galley of type and scrambled it to make a type specim
-                  book. It has survived not only five <strong>gravida</strong>{" "}
-                  but also the leap into electronic typesetting, remaining
-                  essentially unchange was popularised in the 1960s with the
-                  release of Letraset sheets containing Lorem Ipsum{" "}
-                  <a href="index.html">Ipsum</a> and more recently with desktop
-                  publishing software like Aldus Page maker including versions
-                  of Lorem Ipsum.
-                </p>
-                <p>
-                  There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration in some
-                  form, by injected humour, or randomised words which don't look
-                  even slightly believable. If you are going to use a passage of
-                  Lorem Ipsum, you need to be sure there isn't anything
-                  embarrassing hidden in the middle of text.
-                </p>
+                <h1>{props?.data?.Heading}</h1>
+                <p>{props?.data?.Description}</p>
               </div>
               <div className="row">
-                <div className="col-md-6">
-                  <div className="news-img">
-                    <img src="assets/img/news/single-news-5.webp" alt="Image" />
+                {props?.data?.Images?.map(function (obj, index) {
+                  return (
+                    <div key={index} className="col-md-6">
+                      <div className="news-img">
+                        <img
+                          loading="lazy"
+                          src={
+                            obj?.urls
+                              ? obj.urls
+                              : "assets/img/news/single-news-5.webp"
+                          }
+                          alt="Image"
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              {props?.data?.SubHeadingsData?.map(function (obj, index) {
+                return (
+                  <div key={index} className="news-para">
+                    <h5>{obj?.Sub_Heading}</h5>
+                    <p>{obj?.Sub_Heading_Description}</p>
                   </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="news-img">
-                    <img src="assets/img/news/single-news-6.webp" alt="Image" />
-                  </div>
-                </div>
-              </div>
-              <div className="news-para">
-                <h5>
-                  Mastering Digital Transformation: How to Stay Ahead in a
-                  Rapidly Changing Business Landscape
-                </h5>
-                <p>
-                  There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration in some
-                  form, by injected humour, or randomised words which don't look
-                  even slightly believable. If you are going to use a passage of
-                  Lorem Ipsum, you need to be sure there isn't anything
-                  embarrassing hidden in the middle of text.
-                </p>
-                <h5>Unordered &amp; Ordered Lists</h5>
-                <p>
-                  There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration in some
-                  form by injected humour, or randomised words which don't look
-                  even slightly believable.
-                </p>
-                <ul className="content-feature-list list-style mt-15">
-                  <li>
-                    <span>
-                      <i className="flaticon-arrow-right" />
-                    </span>
-                    It is a long established fact that a reader will be
-                    distracted by the readable content.
-                  </li>
-                  <li>
-                    <span>
-                      <i className="flaticon-arrow-right" />
-                    </span>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting
-                  </li>
-                  <li>
-                    <span>
-                      <i className="flaticon-arrow-right" />
-                    </span>
-                    It was popularised in the 1960s with the release of Letraset
-                    sheets
-                  </li>
-                  <li>
-                    <span>
-                      <i className="flaticon-arrow-right" />
-                    </span>
-                    Publishing software like Aldus PageMaker including versions
-                    of Lorem Ipsum.
-                  </li>
-                  <li>
-                    <span>
-                      <i className="flaticon-arrow-right" />
-                    </span>
-                    All the Lorem Ipsum generators on the Internet tend to
-                    repeat predefined.
-                  </li>
-                </ul>
-                <p>
-                  There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration in some
-                  form, by injected humour, or randomised words which don't look
-                  even slightly believable. If you are going to use a{" "}
-                  <strong>adipisicing</strong> of Lorem Ipsum, you need to be
-                  sure there isn't anything embarrassing hidden in the middle of
-                  text.
-                </p>
-              </div>
-              <blockquote className="wp-block-quote">
-                <i className="fi fi-rr-quote-right" />
-                <p>
-                  “ People find waiting more tolerable when they can see the
-                  work being done on their behalf ”
-                </p>
-                <h6>William Benjamin</h6>
-              </blockquote>
-              <div className="news-para">
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  stand dummy text ever since the 1500s, when an unknown printer
-                  took a galley of type and scrambled it to make a type specim
-                  book. It has survived not only five centuries, but also the
-                  leap into electronic typesetting, remaining essentially
-                  unchange was popularised in the 1960s with the release of
-                  Letraset sheets containing Lorem Ipsum passages, and more
-                  recently with desktop publishing software like Aldus PageMaker
-                  including versions of Lorem Ipsum.
-                </p>
-                <ol>
-                  <li>
-                    Lacus sed viverra tellus in hac habitasse platea dictumst.
-                  </li>
-                  <li>
-                    Gravida neque convallis a <strong>cras</strong> semper
-                    auctor neque vitae.
-                  </li>
-                  <li>
-                    Lacus sed turpis tincidunt id aliquet risus feugiat in.
-                  </li>
-                  <li>
-                    Risus commodo viverra manas accumsan lacus vel facilisis
-                  </li>
-                </ol>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quisquam culpa reprehenderit ad ipsa porro obcaecati
-                  accusantium tempore officiis tenetur est!
-                </p>
-              </div>
+                );
+              })}
             </article>
             <div className="post-pagination">
               <a className="prev-post" href="business-details.html">
