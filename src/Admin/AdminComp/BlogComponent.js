@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const BlogComponent = (props) => {
   const navigate = useNavigate();
+  const [loader, setloader] = useState(false);
   function openblog(key) {
-    localStorage.setItem("CurrentBlog", JSON.stringify(key));
-    navigate("/AdminBlogDetail");
+    try {
+      localStorage.setItem("CurrentBlog", JSON.stringify(key));
+      navigate("/AdminBlogDetail");
+    } catch (error) {
+      alert("Something went wrong");
+    } finally {
+      setloader(false);
+    }
   }
   return (
     <div className="sports-wrap ptb-100">
@@ -20,6 +27,11 @@ const BlogComponent = (props) => {
                     return (
                       <div key={index} className="col-xl-6 col-lg-6 col-md-6">
                         <div className="news-card-thirteen">
+                          {loader && (
+                            <div className="preloaders">
+                              <div className="loaders"></div>
+                            </div>
+                          )}
                           <div className="news-card-img">
                             <img
                               onClick={() => openblog(key)}
@@ -62,6 +74,11 @@ const BlogComponent = (props) => {
                     return (
                       <div key={index} className="col-xl-6 col-lg-6 col-md-6">
                         <div className="news-card-thirteen">
+                          {loader && (
+                            <div className="preloaders">
+                              <div className="loaders"></div>
+                            </div>
+                          )}
                           <div className="news-card-img">
                             <img
                               onClick={() => openblog(key)}
@@ -115,43 +132,43 @@ const BlogComponent = (props) => {
                 <ul className="category-widget list-style">
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Celebration <span>(6)</span>
                     </a>
                   </li>
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Culture<span>(3)</span>
                     </a>
                   </li>
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Fashion<span>(2)</span>
                     </a>
                   </li>
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Inspiration<span>(8)</span>
                     </a>
                   </li>
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Lifestyle<span>(6)</span>
                     </a>
                   </li>
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Politics<span>(2)</span>
                     </a>
                   </li>
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Trending<span>(4)</span>
                     </a>
                   </li>

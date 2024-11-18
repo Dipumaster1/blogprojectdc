@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const AdminFooter = () => {
+  const navigate = useNavigate();
+  function Logout() {
+    localStorage.clear();
+    window.history.replaceState(null, null, "/Login");
+    navigate("/", { replace: true });
+  }
   return (
     <div>
       <div className="container-fluid">
@@ -16,6 +23,7 @@ const AdminFooter = () => {
             <div className="col-lg-4">
               <div className="footer-right">
                 <button
+                  onClick={Logout}
                   className="subscribe-btn"
                   data-bs-toggle="modal"
                   data-bs-target="#newsletter-popup"
