@@ -370,7 +370,7 @@ const AddBlogComp = () => {
                         src={
                           headingimage
                             ? URL.createObjectURL(headingimage)
-                            : "/assets/img/newsletter-bg.webp"
+                            : "/assets/img/noimage.jpg"
                         }
                         alt=""
                       />
@@ -401,7 +401,7 @@ const AddBlogComp = () => {
                             src={
                               Obj
                                 ? URL.createObjectURL(Obj)
-                                : "assets/img/newsletter-bg.webp"
+                                : "assets/img/noimage.jpg"
                             }
                             alt=""
                           />

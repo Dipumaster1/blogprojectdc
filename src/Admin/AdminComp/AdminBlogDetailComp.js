@@ -15,6 +15,11 @@ const AdminBlogDetailComp = (props) => {
               <div className="news-img">
                 <img
                   loading="lazy"
+                  style={{
+                    height: "400px",
+                    width: "900px",
+                    backgroundSize: "cover",
+                  }}
                   src={props?.data?.HeadingImage?.url}
                   alt="Image"
                 />
@@ -40,6 +45,7 @@ const AdminBlogDetailComp = (props) => {
                     <div key={index} className="col-md-6">
                       <div className="news-img">
                         <img
+                          style={{ height: "250px", width: "420px" }}
                           loading="lazy"
                           src={
                             obj?.urls
@@ -266,43 +272,43 @@ const AdminBlogDetailComp = (props) => {
                 <ul className="category-widget list-style">
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Celebration <span>(6)</span>
                     </a>
                   </li>
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Culture<span>(3)</span>
                     </a>
                   </li>
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Fashion<span>(2)</span>
                     </a>
                   </li>
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Inspiration<span>(8)</span>
                     </a>
                   </li>
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Lifestyle<span>(6)</span>
                     </a>
                   </li>
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Politics<span>(2)</span>
                     </a>
                   </li>
                   <li>
                     <a href="business.html">
-                      <img src="assets/img/icons/arrow-right.svg" alt="Image" />
+                      <i className="flaticon-right-arrow"></i>
                       Trending<span>(4)</span>
                     </a>
                   </li>

@@ -20,7 +20,7 @@ const AdminRoutes = () => {
         if (snap.val()) return setdata(snap.val());
         else return setdata(null);
       });
-    setloader(false);
+    setTimeout(() => setloader(false), 1500);
   }, []);
   return (
     <AdminBlogContext.Provider value={{ fetchblogs: data, loader: loader }}>

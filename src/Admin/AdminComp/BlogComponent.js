@@ -3,19 +3,21 @@ import { useNavigate } from "react-router-dom";
 
 const BlogComponent = (props) => {
   const navigate = useNavigate();
-  const [loader, setloader] = useState(false);
   function openblog(key) {
     try {
       localStorage.setItem("CurrentBlog", JSON.stringify(key));
       navigate("/AdminBlogDetail");
     } catch (error) {
       alert("Something went wrong");
-    } finally {
-      setloader(false);
     }
   }
   return (
     <div className="sports-wrap ptb-100">
+      {props.load && (
+        <div className="preloaders">
+          <div className="loaders"></div>
+        </div>
+      )}
       <div className="container">
         <div className="row gx-55 gx-5">
           <div className="col-lg-8">
@@ -27,14 +29,14 @@ const BlogComponent = (props) => {
                     return (
                       <div key={index} className="col-xl-6 col-lg-6 col-md-6">
                         <div className="news-card-thirteen">
-                          {loader && (
-                            <div className="preloaders">
-                              <div className="loaders"></div>
-                            </div>
-                          )}
                           <div className="news-card-img">
                             <img
                               onClick={() => openblog(key)}
+                              style={{
+                                height: "250px",
+                                width: "400px",
+                                backgroundSize: "cover",
+                              }}
                               loading="lazy"
                               src={props?.data[key]?.HeadingImage?.url}
                               alt="Iamge"
@@ -74,14 +76,14 @@ const BlogComponent = (props) => {
                     return (
                       <div key={index} className="col-xl-6 col-lg-6 col-md-6">
                         <div className="news-card-thirteen">
-                          {loader && (
-                            <div className="preloaders">
-                              <div className="loaders"></div>
-                            </div>
-                          )}
                           <div className="news-card-img">
                             <img
                               onClick={() => openblog(key)}
+                              style={{
+                                height: "250px",
+                                width: "400px",
+                                backgroundSize: "cover",
+                              }}
                               loading="lazy"
                               src={props?.data[key]?.HeadingImage?.url}
                               alt="Iamge"
