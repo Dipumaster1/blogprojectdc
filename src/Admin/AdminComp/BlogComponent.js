@@ -127,10 +127,7 @@ const BlogComponent = (props) => {
                     return (
                       <li key={index}>
                         <a href="#">
-                          <img
-                            src="assets/img/icons/arrow-right.svg"
-                            alt="Image"
-                          />
+                          <i className="flaticon-right-arrow"></i>
                           {obj.Category} <span>({obj.Times})</span>
                         </a>
                       </li>

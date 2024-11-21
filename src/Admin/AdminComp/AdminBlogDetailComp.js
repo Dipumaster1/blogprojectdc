@@ -1,10 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const AdminBlogDetailComp = (props) => {
+  const navigate = useNavigate();
   function GetDate(date) {
     if (!date) return "-----";
     const d = new Date(date);
     return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  }
+  function openblog(key) {
+    localStorage.setItem("CurrentBlog", JSON.stringify(key));
+    navigate("/AdminBlogDetail", { replace: true });
+    props.fun(key);
   }
   return (
     <div className="news-details-wrap ptb-100">
@@ -69,16 +76,23 @@ const AdminBlogDetailComp = (props) => {
               })}
             </article>
             <div className="post-pagination">
-              <a className="prev-post" href="business-details.html">
-                <span>PREVIOUS</span>
-                <h6>The Future Of Business: Predictions And Trends To Watch</h6>
-              </a>
-              <a className="next-post" href="business-details.html">
-                <span>NEXT</span>
-                <h6>
-                  From Start-up To Scale-up: Navigating Growth In Your Business
-                </h6>
-              </a>
+              {props?.previous ? (
+                <a
+                  onClick={() => openblog(props.previous)}
+                  className="prev-post"
+                >
+                  <span>PREVIOUS</span>
+                  <h6>{props.alldata[props.previous].Title}</h6>
+                </a>
+              ) : (
+                <a></a>
+              )}
+              {props?.next && (
+                <a className="next-post" onClick={() => openblog(props.next)}>
+                  <span>NEXT</span>
+                  <h6>{props.alldata[props.next].Title}</h6>
+                </a>
+              )}
             </div>
             <h3 className="comment-box-title">3 Comments</h3>
             <div className="comment-item-wrap">
@@ -191,71 +205,42 @@ const AdminBlogDetailComp = (props) => {
                 </div>
               </div>
             </div>
-            <div id="cmt-form">
-              <div className="mb-30">
-                <h3 className="comment-box-title">Leave A Comment</h3>
-                <p>
-                  Your email address will not be published. Required fields are
-                  marked.
-                </p>
-              </div>
-              <form action="#" className="comment-form">
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        required
-                        placeholder="Name*"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        required
-                        placeholder="Email Address*"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-lg-12">
-                    <div className="form-group">
-                      <textarea
-                        name="messages"
-                        id="messages"
-                        cols={30}
-                        rows={10}
-                        placeholder="Please Enter Your Comment Here"
-                        defaultValue={""}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-12">
-                    <div className="form-check checkbox">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id="test_2"
-                      />
-                      <label className="form-check-label" htmlFor="test_2">
-                        Save my info for the next time I commnet.
-                      </label>
-                    </div>
-                  </div>
-                  <div className="col-md-12 mt-3">
-                    <button className="btn-two">
-                      Post A Comment
-                      <i className="flaticon-right-arrow" />
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
+            {/* <div id="cmt-form">
+                                <div className="mb-30">
+                                    <h3 className="comment-box-title">Leave A Comment</h3>
+                                    <p>Your email address will not be published. Required fields are marked.</p>
+                                </div>
+                                <form action="#" className="comment-form">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="form-group">
+                                                <input type="text" name="name" id="name" required placeholder="Name*" />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="form-group">
+                                                <input type="email" name="email" id="email" required placeholder="Email Address*" />
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-12">
+                                            <div className="form-group">
+                                                <textarea name="messages" id="messages" cols={30} rows={10} placeholder="Please Enter Your Comment Here" defaultValue={""} />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12">
+                                            <div className="form-check checkbox">
+                                                <input className="form-check-input" type="checkbox" id="test_2" />
+                                                <label className="form-check-label" htmlFor="test_2">
+                                                    Save my info for the next time I commnet.
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12 mt-3">
+                                            <button className="btn-two">Post A Comment<i className="flaticon-right-arrow" /></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div> */}
           </div>
           <div className="col-lg-4">
             <div className="sidebar">
@@ -263,80 +248,60 @@ const AdminBlogDetailComp = (props) => {
                 <h3 className="sidebar-widget-title">Recent Posts</h3>
                 <div className="pp-post-wrap">
                   {props?.alldata && props?.current
-                    ? Object.keys(props.alldata).map((key, index) => {
-                        if (key !== props.current) {
-                          const date = new Date(props?.alldata[key]?.Date);
-                          return (
-                            <div key={index} className="news-card-one">
-                              <div className="news-card-img">
-                                <img
-                                  loading="lazy"
-                                  style={{
-                                    borderRadius: "50%",
-                                    height: "100%",
-                                    width: "100%",
-                                    cursor: "pointer",
-                                  }}
-                                  src={props?.alldata[key]?.HeadingImage?.url}
-                                  alt="Image"
-                                />
+                    ? Object.keys(props.alldata)
+                        .reverse()
+                        .map((key, index) => {
+                          if (key !== props.current && index < 10) {
+                            const date = new Date(props?.alldata[key]?.Date);
+                            return (
+                              <div key={index} className="news-card-one">
+                                <div className="news-card-img">
+                                  <img
+                                    onClick={() => openblog(key)}
+                                    loading="lazy"
+                                    style={{
+                                      borderRadius: "50%",
+                                      height: "100%",
+                                      width: "100%",
+                                      cursor: "pointer",
+                                    }}
+                                    src={props?.alldata[key]?.HeadingImage?.url}
+                                    alt="Image"
+                                  />
+                                </div>
+                                <div className="news-card-info">
+                                  <h3>
+                                    <a onClick={() => openblog(key)}>
+                                      {props?.alldata[key]?.Title}
+                                    </a>
+                                  </h3>
+                                  <ul className="news-metainfo list-style">
+                                    <li>
+                                      <i className="fi fi-rr-calendar-minus" />
+                                      <a href="#">{`${date.getDate()}/${
+                                        date.getMonth() + 1
+                                      }/${date.getFullYear()}`}</a>
+                                    </li>
+                                  </ul>
+                                </div>
                               </div>
-                              <div className="news-card-info">
-                                <h3>
-                                  <a>{props?.alldata[key]?.Title}</a>
-                                </h3>
-                                <ul className="news-metainfo list-style">
-                                  <li>
-                                    <i className="fi fi-rr-calendar-minus" />
-                                    <a href="#">{`${date.getDate()}/${
-                                      date.getMonth() + 1
-                                    }/${date.getFullYear()}`}</a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          );
-                        }
-                      })
+                            );
+                          }
+                        })
                     : ""}
                 </div>
               </div>
               <div className="sidebar-widget">
                 <h3 className="sidebar-widget-title">Popular Tags</h3>
                 <ul className="tag-list list-style">
-                  <li>
-                    <a href="news-by-tags.html">BUSINESS</a>
-                  </li>
-                  <li>
-                    <a href="news-by-tags.html">FOOD</a>
-                  </li>
-                  <li>
-                    <a href="news-by-tags.html">SCIENCE</a>
-                  </li>
-                  <li>
-                    <a href="news-by-tags.html">LIFESTYLE</a>
-                  </li>
-                  <li>
-                    <a href="news-by-tags.html">SPORTS</a>
-                  </li>
-                  <li>
-                    <a href="news-by-tags.html">PHOTO</a>
-                  </li>
-                  <li>
-                    <a href="news-by-tags.html">TECHNOLOGY</a>
-                  </li>
-                  <li>
-                    <a href="news-by-tags.html">CONTENT</a>
-                  </li>
-                  <li>
-                    <a href="news-by-tags.html">FEATURED</a>
-                  </li>
-                  <li>
-                    <a href="news-by-tags.html">AUDIO</a>
-                  </li>
-                  <li>
-                    <a href="news-by-tags.html">FASHION</a>
-                  </li>
+                  {props?.data &&
+                    props.data.Tags.split(",").map((tag, index) => {
+                      return (
+                        <li key={index}>
+                          <a href="#">{tag}</a>
+                        </li>
+                      );
+                    })}
                 </ul>
               </div>
             </div>

@@ -11,21 +11,36 @@ const AdminBlogDetail = () => {
   const navigate = useNavigate();
   const [data, setdata] = useState(null);
   const { fetchblogs } = useContext(AdminBlogContext);
-  const [current, setcurrent] = useState(null);
+  const [current, setcurrent] = useState(
+    JSON.parse(localStorage.getItem("CurrentBlog"))
+  );
+  const [nextblogkey, setnextblogkey] = useState(null);
+  const [previousblogkey, setpreviousblogkey] = useState(null);
   useEffect(() => {
     if (fetchblogs) {
-      const currentblog = JSON.parse(localStorage.getItem("CurrentBlog"));
-      if (!currentblog) return navigate("/Blogs");
-      if (!fetchblogs[currentblog]) return navigate("/Blogs");
+      if (!current) return navigate("/Blogs");
+      if (!fetchblogs[current]) return navigate("/Blogs");
 
-      const result = Object.keys(fetchblogs).filter(
-        (key) => key === currentblog
-      );
+      const result = Object.keys(fetchblogs).filter((key) => key === current);
       if (result.length === 0) return navigate("/Blogs");
-      setdata(fetchblogs[currentblog]);
-      setcurrent(currentblog);
+      setdata(fetchblogs[current]);
+
+      const array = Object.keys(fetchblogs);
+      let currentblogindex = null;
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] === current) {
+          currentblogindex = i;
+          break;
+        }
+      }
+      const next = currentblogindex + 1;
+      const previous = currentblogindex - 1;
+      if (next < array.length) setnextblogkey(array[next]);
+      else setnextblogkey(null);
+      if (previous > -1) setpreviousblogkey(array[previous]);
+      else setpreviousblogkey(null);
     }
-  }, [fetchblogs]);
+  }, [fetchblogs, current]);
   return (
     <div>
       <AdminHeader blog="active" />
@@ -37,9 +52,12 @@ const AdminBlogDetail = () => {
         }
       >
         <AdminBlogDetailComp
-          data={data}
+          fun={setcurrent}
+          next={nextblogkey}
+          previous={previousblogkey}
           alldata={fetchblogs}
           current={current}
+          data={data}
         />
       </Suspense>
       <AdminFooter />
