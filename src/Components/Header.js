@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = (props) => {
   const [toggle, settoggle] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
   const toggleAccordion = (index) => {
@@ -44,30 +44,47 @@ const Header = () => {
             <div className="collapse navbar-collapse">
               <ul className="navbar-nav mx-auto">
                 <li className="nav-item">
-                  <Link to={"/"} className="nav-link">
+                  <Link
+                    to={"/"}
+                    className={props.home ? "nav-link active" : "nav-link"}
+                  >
                     Home
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={"/Blog"} className="nav-link">
+                  <Link
+                    to={"/Blog"}
+                    className={props.latBlog ? "nav-link active" : "nav-link"}
+                  >
                     Latest Blogs
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={"/Author"} className="nav-link">
+                  <Link
+                    to={"/Author"}
+                    className={props.authors ? "nav-link active" : "nav-link"}
+                  >
                     Authors
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="dropdown-toggle nav-link">Pages</Link>
+                  <Link className={props.page ? "nav-link active" : "nav-link"}>
+                    Pages
+                  </Link>
                   <ul className="dropdown-menu">
                     <li className="nav-item">
-                      <Link to={"/Privacy"} className="nav-link">
+                      <Link
+                        to={"/Privacy"}
+                        className={props.page ? "nav-link active" : "nav-link"}
+                      >
                         Privacy Policy
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link to={"/TermsandCondition"} className="nav-link">
+                      <Link
+                        to={"/TermsandCondition"}
+                        className={props.page ? "nav-link active" : "nav-link"}
+                      >
                         Terms &amp; Conditions
                       </Link>
                     </li>

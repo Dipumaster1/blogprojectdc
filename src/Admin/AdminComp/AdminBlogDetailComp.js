@@ -259,190 +259,46 @@ const AdminBlogDetailComp = (props) => {
           </div>
           <div className="col-lg-4">
             <div className="sidebar">
-              <div className="sidebar-widget-two">
-                <form action="#" className="search-box-widget">
-                  <input type="search" placeholder="Search" />
-                  <button type="submit">
-                    <i className="fi fi-rr-search" />
-                  </button>
-                </form>
-              </div>
-              <div className="sidebar-widget">
-                <h3 className="sidebar-widget-title">Categories</h3>
-                <ul className="category-widget list-style">
-                  <li>
-                    <a href="business.html">
-                      <i className="flaticon-right-arrow"></i>
-                      Celebration <span>(6)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="business.html">
-                      <i className="flaticon-right-arrow"></i>
-                      Culture<span>(3)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="business.html">
-                      <i className="flaticon-right-arrow"></i>
-                      Fashion<span>(2)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="business.html">
-                      <i className="flaticon-right-arrow"></i>
-                      Inspiration<span>(8)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="business.html">
-                      <i className="flaticon-right-arrow"></i>
-                      Lifestyle<span>(6)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="business.html">
-                      <i className="flaticon-right-arrow"></i>
-                      Politics<span>(2)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="business.html">
-                      <i className="flaticon-right-arrow"></i>
-                      Trending<span>(4)</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
               <div className="sidebar-widget">
                 <h3 className="sidebar-widget-title">Recent Posts</h3>
                 <div className="pp-post-wrap">
-                  <div className="news-card-one">
-                    <div className="news-card-img">
-                      <img
-                        src="assets/img/news/news-thumb-4.webp"
-                        alt="Image"
-                      />
-                    </div>
-                    <div className="news-card-info">
-                      <h3>
-                        <a href="business-details.html">
-                          Bernie Nonummy Pelopai Iatis Eum Litora
-                        </a>
-                      </h3>
-                      <ul className="news-metainfo list-style">
-                        <li>
-                          <i className="fi fi-rr-calendar-minus" />
-                          <a href="news-by-date.html">Apr 22, 2024</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="news-card-one">
-                    <div className="news-card-img">
-                      <img
-                        src="assets/img/news/news-thumb-5.webp"
-                        alt="Image"
-                      />
-                    </div>
-                    <div className="news-card-info">
-                      <h3>
-                        <a href="business-details.html">
-                          How Youth Viral Diseases May The Year 2023
-                        </a>
-                      </h3>
-                      <ul className="news-metainfo list-style">
-                        <li>
-                          <i className="fi fi-rr-calendar-minus" />
-                          <a href="news-by-date.html">Apr 23, 2024</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="news-card-one">
-                    <div className="news-card-img">
-                      <img
-                        src="assets/img/news/news-thumb-6.webp"
-                        alt="Image"
-                      />
-                    </div>
-                    <div className="news-card-info">
-                      <h3>
-                        <a href="business-details.html">
-                          Man Wearing Black Pullover Hoodie To Smoke
-                        </a>
-                      </h3>
-                      <ul className="news-metainfo list-style">
-                        <li>
-                          <i className="fi fi-rr-calendar-minus" />
-                          <a href="news-by-date.html">Apr 14, 2024</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="news-card-one">
-                    <div className="news-card-img">
-                      <img
-                        src="assets/img/news/news-thumb-7.webp"
-                        alt="Image"
-                      />
-                    </div>
-                    <div className="news-card-info">
-                      <h3>
-                        <a href="business-details.html">
-                          First Prototype Flight Using Kinetic Launch System
-                        </a>
-                      </h3>
-                      <ul className="news-metainfo list-style">
-                        <li>
-                          <i className="fi fi-rr-calendar-minus" />
-                          <a href="news-by-date.html">Apr 07, 2024</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="news-card-one">
-                    <div className="news-card-img">
-                      <img
-                        src="assets/img/news/news-thumb-8.webp"
-                        alt="Image"
-                      />
-                    </div>
-                    <div className="news-card-info">
-                      <h3>
-                        <a href="business-details.html">
-                          Beauty Queens Need Material &amp; Products
-                        </a>
-                      </h3>
-                      <ul className="news-metainfo list-style">
-                        <li>
-                          <i className="fi fi-rr-calendar-minus" />
-                          <a href="news-by-date.html">Apr 03, 2024</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="news-card-one">
-                    <div className="news-card-img">
-                      <img
-                        src="assets/img/news/news-thumb-9.webp"
-                        alt="Image"
-                      />
-                    </div>
-                    <div className="news-card-info">
-                      <h3>
-                        <a href="business-details.html">
-                          That Woman Comes From Heaven Look Like Angel
-                        </a>
-                      </h3>
-                      <ul className="news-metainfo list-style">
-                        <li>
-                          <i className="fi fi-rr-calendar-minus" />
-                          <a href="news-by-date.html">Apr 01, 2024</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                  {props?.alldata && props?.current
+                    ? Object.keys(props.alldata).map((key, index) => {
+                        if (key !== props.current) {
+                          const date = new Date(props?.alldata[key]?.Date);
+                          return (
+                            <div key={index} className="news-card-one">
+                              <div className="news-card-img">
+                                <img
+                                  loading="lazy"
+                                  style={{
+                                    borderRadius: "50%",
+                                    height: "100%",
+                                    width: "100%",
+                                    cursor: "pointer",
+                                  }}
+                                  src={props?.alldata[key]?.HeadingImage?.url}
+                                  alt="Image"
+                                />
+                              </div>
+                              <div className="news-card-info">
+                                <h3>
+                                  <a>{props?.alldata[key]?.Title}</a>
+                                </h3>
+                                <ul className="news-metainfo list-style">
+                                  <li>
+                                    <i className="fi fi-rr-calendar-minus" />
+                                    <a href="#">{`${date.getDate()}/${
+                                      date.getMonth() + 1
+                                    }/${date.getFullYear()}`}</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          );
+                        }
+                      })
+                    : ""}
                 </div>
               </div>
               <div className="sidebar-widget">

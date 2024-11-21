@@ -1,16 +1,16 @@
-import React from 'react'
-import Header from '../Components/Header'
-import BlogDetailComp from '../Components/BlogComponents/BlogDetailComp'
-import Footer from '../Components/Footer'
+import React from "react";
+import Header from "../Components/Header";
+import BlogDetailComp from "../Components/BlogComponents/BlogDetailComp";
+import Footer from "../Components/Footer";
 
 const Blogdetails = () => {
   return (
     <div>
-        <Header/>
-        <BlogDetailComp/>
-        <Footer/>
+      <Header home="active" />
+      <BlogDetailComp />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Blogdetails
+export default Blogdetails;
