@@ -124,7 +124,7 @@ const AddBlogComp = () => {
 
       // saving heading image storage
 
-      const fileRef = storage.child(headingimage.name);
+      const fileRef = storage.child(Date.now() + headingimage.name);
       await fileRef.put(headingimage);
       const url = await fileRef.getDownloadURL();
       const path = fileRef.fullPath;
@@ -141,7 +141,7 @@ const AddBlogComp = () => {
       if (images.length > 0) {
         let myarray = [];
         for (let j = 0; j < images.length; j++) {
-          const fileRefs = storage.child(images[j].name);
+          const fileRefs = storage.child(Date.now() + images[j].name);
           await fileRefs.put(images[j]);
           const urls = await fileRefs.getDownloadURL();
           const paths = fileRefs.fullPath;

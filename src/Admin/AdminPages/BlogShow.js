@@ -19,6 +19,7 @@ const BlogShow = () => {
       for (let i = 0; i < array.length; i++) {
         const newcate = array[i];
         let count = 0;
+
         for (let j = 0; j < resultingarray.length; j++) {
           if (fetchblogs[resultingarray[j]].Category == newcate) {
             count++;
