@@ -2,8 +2,8 @@
 :root {
   --bodyFont: "Roboto", sans-serif;
   --secondaryFont: "Poppins", sans-serif;
-  --primaryColor: #252020;
-  --secondaryColor: #0da10f;
+  --primaryColor: #222222;
+  --secondaryColor: #e93314;
   --paraColor: #555555;
   --optionalColor: #888888;
   --bgColor: #f6f6f6;
@@ -165,7 +165,7 @@ select {
   margin: 0;
 }
 .help-block {
-  color: #197e2f;
+  color: #e31c25;
 }
 .list-style {
   margin: 0;
@@ -4785,7 +4785,7 @@ select {
 .author-box {
   display: flex;
   flex-wrap: wrap;
-  padding: 50px;
+  padding: 20px;
   border-radius: 5px;
   border: 1px solid #eee;
   background-color: var(--whiteColor);
@@ -4799,8 +4799,8 @@ select {
   border-radius: 50%;
 }
 .author-box .author-info {
-  width: calc(100% - 180px);
-  margin-left: 30px;
+  width: calc(66% - 180px);
+  /* margin-left: 300px; */
 }
 .author-box .author-info h4 {
   font-size: 30px;
