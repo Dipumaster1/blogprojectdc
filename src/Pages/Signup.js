@@ -72,7 +72,7 @@ const Signup = () => {
           Back
         </Link>
         <div className="login-form">
-          <h3>Account SignUp</h3>
+          <h3>Account-SignUp</h3>
           <div className="alt-login">
             <a style={{ width: "100%" }} href="https://www.gmail.com/">
               <img src="assets/img/icons/google.svg" alt="Image" />

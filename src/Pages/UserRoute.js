@@ -6,7 +6,10 @@ import Firebase from "../Firebase";
 const UserRoute = () => {
   const [state, setstate] = useState([]);
   const [images, setimages] = useState([]);
+  const [loading, setloading] = useState(false);
+  const [users, setusers] = useState({});
   useEffect(() => {
+    setloading(true);
     Firebase.child("Blogs").on("value", function (snap) {
       if (snap.val()) {
         let array = [];
@@ -18,7 +21,7 @@ const UserRoute = () => {
           });
         });
         array.sort((a, b) => b.Date - a.Date);
-        const newarray = array.slice(0, 10);
+        const newarray = array.slice(0, 12);
         setstate(newarray);
         let resultingarray = [];
         newarray.map((obj) => {
@@ -33,10 +36,20 @@ const UserRoute = () => {
         setimages([]);
       }
     });
+    Firebase.child("Users").on("value", function (snap) {
+      if (snap.val()) return setusers(snap.val());
+      else return setusers({});
+    });
+    setTimeout(() => setloading(false), 2000);
   }, []);
   return (
     <UserContext.Provider
-      value={{ fetchlatestblogs: state, fetchlatestimages: images }}
+      value={{
+        fetchlatestblogs: state,
+        fetchlatestimages: images,
+        users: users,
+        loading: loading,
+      }}
     >
       <Outlet />
     </UserContext.Provider>

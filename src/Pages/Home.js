@@ -1,24 +1,65 @@
-import React, { useContext } from "react";
+import React, { Suspense, useContext, useEffect } from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import HomeBlog from "../Components/HomeComponents/HomeBlog";
 import HomeLatestBlog from "../Components/HomeComponents/HomeLatestBlog";
-import HomeInstaSlider from "../Components/HomeComponents/HomeInstaSlider";
-import TrendingNow from "../Components/HomeComponents/TrendingNow";
-//import Newsletter from '../Components/Newsletter'
+//import Newsletter from "../Components/Newsletter";
 import UserContext from "./Context/UserContext";
+const TrendingNow = React.lazy(() =>
+  import("../Components/HomeComponents/TrendingNow")
+);
+const HomeBlog = React.lazy(() =>
+  import("../Components/HomeComponents/HomeBlog")
+);
+const HomeInstaSlider = React.lazy(() =>
+  import("../Components/HomeComponents/HomeInstaSlider")
+);
 
 const Home = () => {
-  const { fetchlatestimages, fetchlatestblogs } = useContext(UserContext);
+  const { fetchlatestimages, fetchlatestblogs, loading } =
+    useContext(UserContext);
+  useEffect(() => localStorage.clear(), []);
   return (
     <div>
-      <Header />
-      {fetchlatestblogs && fetchlatestblogs.length > 3 && (
-        <TrendingNow data={fetchlatestblogs} />
+      <Header home="active" />
+      {loading && (
+        <div className="preloaders">
+          <div className="loaders"></div>
+        </div>
       )}
-      <HomeBlog />
+
+      <Suspense
+        fallback={
+          <div className="preloaders">
+            <div className="loaders"></div>
+          </div>
+        }
+      >
+        {fetchlatestblogs && fetchlatestblogs.length > 3 && (
+          <TrendingNow data={fetchlatestblogs} />
+        )}
+      </Suspense>
+
+      <Suspense
+        fallback={
+          <div className="preloaders">
+            <div className="loaders"></div>
+          </div>
+        }
+      >
+        <HomeBlog data={fetchlatestblogs} />
+      </Suspense>
+
       <HomeLatestBlog />
-      <HomeInstaSlider data={fetchlatestimages} />
+
+      <Suspense
+        fallback={
+          <div className="preloaders">
+            <div className="loaders"></div>
+          </div>
+        }
+      >
+        <HomeInstaSlider data={fetchlatestimages} />
+      </Suspense>
       <Footer />
       {/* <Newsletter/> */}
     </div>

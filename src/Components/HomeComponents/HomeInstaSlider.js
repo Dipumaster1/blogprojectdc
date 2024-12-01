@@ -46,6 +46,7 @@ const HomeInstaSlider = (props) => {
                       rel="noopener noreferrer"
                     >
                       <img
+                        loading="lazy"
                         style={{ height: "250px", width: "400px" }}
                         src={
                           obj?.urls

@@ -32,7 +32,7 @@ const BlogShow = () => {
         finalarray.push(objects);
       }
       setcategory(finalarray);
-    }
+    } else setcategory([]);
   }, [fetchblogs]);
   return (
     <div>

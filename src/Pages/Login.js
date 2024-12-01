@@ -34,13 +34,10 @@ const Login = () => {
       setbtndisable(false);
     }
   }
-  function Connect() {
-    navigate("/Signup");
-  }
   return (
     <div className="login-wrap">
       <div className="login-bg">
-        <a href="index.html" className="navbar-brand">
+        <Link to="/" className="navbar-brand">
           <img
             className="logo-light"
             src="assets/img/logo-white.webp"
@@ -51,7 +48,7 @@ const Login = () => {
             src="assets/img/logo-white.webp"
             alt="Image"
           />
-        </a>
+        </Link>
       </div>
       <div className="login-content">
         <Link to={"/"} className="link-one">
@@ -114,7 +111,10 @@ const Login = () => {
               Login
             </button>
             <p className="login-text">
-              Don't have an account?<a onClick={Connect}>Sign Up</a>
+              Don't have an account?
+              <a onClick={() => navigate("/Signup")} href="#">
+                Sign Up
+              </a>
             </p>
           </form>
         </div>

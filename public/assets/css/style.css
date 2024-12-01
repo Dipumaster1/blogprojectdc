@@ -3,7 +3,7 @@
   --bodyFont: "Roboto", sans-serif;
   --secondaryFont: "Poppins", sans-serif;
   --primaryColor: #222222;
-  --secondaryColor: #e93314;
+  --secondaryColor: #08cb5d;
   --paraColor: #555555;
   --optionalColor: #888888;
   --bgColor: #f6f6f6;
@@ -165,7 +165,7 @@ select {
   margin: 0;
 }
 .help-block {
-  color: #e31c25;
+  color: #05b93b;
 }
 .list-style {
   margin: 0;

@@ -62,29 +62,29 @@ const Header = (props) => {
                 <li className="nav-item">
                   <Link
                     to={"/Author"}
-                    className={props.authors ? "nav-link active" : "nav-link"}
+                    className={props.author ? "nav-link active" : "nav-link"}
                   >
                     Authors
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className={props.page ? "nav-link active" : "nav-link"}>
+                  <Link
+                    className={
+                      props.page
+                        ? "dropdown-toggle nav-link active"
+                        : "dropdown-toggle nav-link"
+                    }
+                  >
                     Pages
                   </Link>
                   <ul className="dropdown-menu">
                     <li className="nav-item">
-                      <Link
-                        to={"/Privacy"}
-                        className={props.page ? "nav-link active" : "nav-link"}
-                      >
+                      <Link to={"/Privacy"} className="nav-link">
                         Privacy Policy
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link
-                        to={"/TermsandCondition"}
-                        className={props.page ? "nav-link active" : "nav-link"}
-                      >
+                      <Link to={"/TermsandCondition"} className="nav-link">
                         Terms &amp; Conditions
                       </Link>
                     </li>
@@ -130,7 +130,7 @@ const Header = (props) => {
             />
             <img
               className="logo-dark"
-              src="../assets/img/logo-white.png"
+              src="../assets/img/Blogimg1.png"
               alt="logo"
             />
           </Link>

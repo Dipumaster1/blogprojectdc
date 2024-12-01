@@ -63,6 +63,7 @@ const TrendingNow = (props) => {
                               <div className="news-card-one">
                                 <div className="news-card-img">
                                   <img
+                                    loading="lazy"
                                     style={{
                                       height: "100px",
                                       width: "110px",
@@ -83,7 +84,7 @@ const TrendingNow = (props) => {
                                   <ul className="news-metainfo list-style">
                                     <li>
                                       <i className="fi fi-rr-user" />
-                                      {obj?.User}
+                                      {obj?.Author}
                                     </li>
                                   </ul>
                                 </div>

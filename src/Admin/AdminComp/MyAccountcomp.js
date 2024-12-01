@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Firebase, { storage } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
+import AdminBlogContext from "../Context/AdminBlogContext";
 
 const MyAccountcomp = (props) => {
   const [image, setimage] = useState(null);
   const [btndisable, setbtndisable] = useState(false);
   const navigate = useNavigate();
+  const { fetchblogs } = useContext(AdminBlogContext);
   const upload = (event) => {
     const file = event.target.files[0];
     if (!file) return alert("Image is not uploaded yet.");
@@ -62,13 +64,18 @@ const MyAccountcomp = (props) => {
             <div className="author-box">
               <div className="author-img">
                 <img
+                  loading="lazy"
                   alt="Image"
-                  src="assets/img/author/single-author.jpg"
-                  style={{ display: "none", visibility: "hidden" }}
+                  src={
+                    props?.user?.ProfileImage?.url
+                      ? props?.user?.ProfileImage?.url
+                      : "assets/img/author/single-author.jpg"
+                  }
                 />
               </div>
-              <div className="author-info">
-                <h4>Scarlett Emily</h4>
+              <div style={{ marginLeft: "100px" }} className="author-info">
+                <h4>{props?.user?.Name}</h4>
+                <h5>{props?.user?.Email}</h5>
                 <p>
                   There are many variations of passages of Lorem Ipsum
                   available, but the majority have suffered alteration in some
@@ -76,30 +83,18 @@ const MyAccountcomp = (props) => {
                   look even slightly believable.
                 </p>
                 <div className="author-profile">
-                  <ul className="social-profile list-style">
-                    <li>
-                      <a href="https://www.fb.com/" target="_blank">
-                        <i className="ri-facebook-fill" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.twitter.com/" target="_blank">
-                        <i className="ri-twitter-fill" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.instagram.com/" target="_blank">
-                        <i className="ri-instagram-line" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.linkedin.com/" target="_blank">
-                        <i className="ri-linkedin-fill" />
-                      </a>
-                    </li>
-                  </ul>
+                  {/* <ul className="social-profile list-style">
+              <li><a href="https://www.fb.com/" target="_blank"><i className="ri-facebook-fill" /></a></li>
+              <li><a href="https://www.twitter.com/" target="_blank"><i className="ri-twitter-fill" /></a>
+              </li>
+              <li><a href="https://www.instagram.com/" target="_blank"><i className="ri-instagram-line" /></a></li>
+              <li><a href="https://www.linkedin.com/" target="_blank"><i className="ri-linkedin-fill" /></a>
+              </li>
+            </ul> */}
                   <div className="author-stat">
-                    <span>40 Articles</span>
+                    {fetchblogs && (
+                      <span>{Object.keys(fetchblogs).length} Blogs</span>
+                    )}
                     <span>191 Comments</span>
                   </div>
                 </div>
@@ -121,6 +116,7 @@ const MyAccountcomp = (props) => {
                 className="author-img"
               >
                 <img
+                  loading="lazy"
                   alt="Image"
                   src={
                     image
@@ -182,13 +178,13 @@ const MyAccountcomp = (props) => {
                 <div className="news-card-five">
                   <div className="news-card-img">
                     <img src="assets/img/news/news-70.webp" alt="Image" />
-                    <a href="business.html" className="news-cat">
+                    <a href="#" className="news-cat">
                       Lifestyle
                     </a>
                   </div>
                   <div className="news-card-info">
                     <h3>
-                      <a href="business-details.html">
+                      <a href="#">
                         Live Your Best Life: Tips For Achieving A Healthy And
                         Fulfilling Lifestyle
                       </a>
@@ -206,7 +202,7 @@ const MyAccountcomp = (props) => {
                             alt="Image"
                           />
                         </span>
-                        <a href="author.html">James William</a>
+                        <a href="#">James William</a>
                       </li>
                       <li>
                         <i className="fi fi-rr-calendar-minus" />
@@ -222,13 +218,13 @@ const MyAccountcomp = (props) => {
                 <div className="news-card-five">
                   <div className="news-card-img">
                     <img src="assets/img/news/news-71.webp" alt="Image" />
-                    <a href="business.html" className="news-cat">
+                    <a href="#" className="news-cat">
                       Business
                     </a>
                   </div>
                   <div className="news-card-info">
                     <h3>
-                      <a href="business-details.html">
+                      <a href="#">
                         Maximizing Profits: A Guide To Streamlining Your
                         Business Operations
                       </a>
@@ -246,7 +242,7 @@ const MyAccountcomp = (props) => {
                             alt="Image"
                           />
                         </span>
-                        <a href="author.html">Amela Mia</a>
+                        <a href="#">Amela Mia</a>
                       </li>
                       <li>
                         <i className="fi fi-rr-calendar-minus" />
@@ -262,7 +258,7 @@ const MyAccountcomp = (props) => {
                 <div className="news-card-five">
                   <div className="news-card-img">
                     <img src="assets/img/news/news-72.webp" alt="Image" />
-                    <a href="business.html" className="news-cat">
+                    <a href="#" className="news-cat">
                       Events
                     </a>
                   </div>
@@ -286,7 +282,7 @@ const MyAccountcomp = (props) => {
                             alt="Image"
                           />
                         </span>
-                        <a href="author.html">Ava Sophia</a>
+                        <a href="#">Ava Sophia</a>
                       </li>
                       <li>
                         <i className="fi fi-rr-calendar-minus" />
@@ -301,13 +297,13 @@ const MyAccountcomp = (props) => {
                 <div className="news-card-five">
                   <div className="news-card-img">
                     <img src="assets/img/news/news-73.webp" alt="Image" />
-                    <a href="business.html" className="news-cat">
+                    <a href="#" className="news-cat">
                       Photography
                     </a>
                   </div>
                   <div className="news-card-info">
                     <h3>
-                      <a href="business-details.html">
+                      <a href="#">
                         Capturing Life's Moments: A Guide to Improving Your
                         Photography Skills
                       </a>
@@ -325,7 +321,7 @@ const MyAccountcomp = (props) => {
                             alt="Image"
                           />
                         </span>
-                        <a href="author.html">Olivia Emma</a>
+                        <a href="#">Olivia Emma</a>
                       </li>
                       <li>
                         <i className="fi fi-rr-calendar-minus" />
@@ -341,7 +337,7 @@ const MyAccountcomp = (props) => {
                 <div className="news-card-five">
                   <div className="news-card-img">
                     <img src="assets/img/news/news-74.webp" alt="Image" />
-                    <a href="business.html" className="news-cat">
+                    <a href="#" className="news-cat">
                       Culture
                     </a>
                   </div>
@@ -365,7 +361,7 @@ const MyAccountcomp = (props) => {
                             alt="Image"
                           />
                         </span>
-                        <a href="author.html">Lima Noah</a>
+                        <a href="#">Lima Noah</a>
                       </li>
                       <li>
                         <i className="fi fi-rr-calendar-minus" />
@@ -381,23 +377,23 @@ const MyAccountcomp = (props) => {
               </div>
               <ul className="page-nav list-style text-center mt-5">
                 <li>
-                  <a href="author.html">
+                  <a href="#">
                     <i className="flaticon-arrow-left" />
                   </a>
                 </li>
                 <li>
-                  <a className="active" href="author.html">
+                  <a className="active" href="#">
                     01
                   </a>
                 </li>
                 <li>
-                  <a href="author.html">02</a>
+                  <a href="#">02</a>
                 </li>
                 <li>
-                  <a href="author.html">03</a>
+                  <a href="#">03</a>
                 </li>
                 <li>
-                  <a href="author.html">
+                  <a href="#">
                     <i className="flaticon-arrow-right" />
                   </a>
                 </li>
@@ -409,7 +405,7 @@ const MyAccountcomp = (props) => {
                   <h3 className="sidebar-widget-title">Explore Topics</h3>
                   <ul className="category-widget list-style">
                     <li>
-                      <a href="business.html">
+                      <a href="#">
                         <img
                           src="assets/img/icons/arrow-right.svg"
                           alt="Image"
@@ -418,7 +414,7 @@ const MyAccountcomp = (props) => {
                       </a>
                     </li>
                     <li>
-                      <a href="business.html">
+                      <a href="#">
                         <img
                           src="assets/img/icons/arrow-right.svg"
                           alt="Image"
@@ -427,7 +423,7 @@ const MyAccountcomp = (props) => {
                       </a>
                     </li>
                     <li>
-                      <a href="business.html">
+                      <a href="#">
                         <img
                           src="assets/img/icons/arrow-right.svg"
                           alt="Image"
@@ -436,7 +432,7 @@ const MyAccountcomp = (props) => {
                       </a>
                     </li>
                     <li>
-                      <a href="business.html">
+                      <a href="#">
                         <img
                           src="assets/img/icons/arrow-right.svg"
                           alt="Image"
@@ -445,7 +441,7 @@ const MyAccountcomp = (props) => {
                       </a>
                     </li>
                     <li>
-                      <a href="business.html">
+                      <a href="#">
                         <img
                           src="assets/img/icons/arrow-right.svg"
                           alt="Image"
@@ -454,7 +450,7 @@ const MyAccountcomp = (props) => {
                       </a>
                     </li>
                     <li>
-                      <a href="business.html">
+                      <a href="#">
                         <img
                           src="assets/img/icons/arrow-right.svg"
                           alt="Image"
@@ -463,7 +459,7 @@ const MyAccountcomp = (props) => {
                       </a>
                     </li>
                     <li>
-                      <a href="business.html">
+                      <a href="#">
                         <img
                           src="assets/img/icons/arrow-right.svg"
                           alt="Image"
@@ -480,7 +476,7 @@ const MyAccountcomp = (props) => {
                       alt="Image"
                       className="contact-shape"
                     />
-                    <a href="index.html" className="logo">
+                    <a href="#" className="logo">
                       <img
                         className="logo-light"
                         src="assets/img/logo.webp"
@@ -533,7 +529,7 @@ const MyAccountcomp = (props) => {
                       </div>
                       <div className="news-card-info">
                         <h3>
-                          <a href="business-details.html">
+                          <a href="#">
                             Bernie Nonummy Pelopai Iatis Eum Litora
                           </a>
                         </h3>
@@ -554,7 +550,7 @@ const MyAccountcomp = (props) => {
                       </div>
                       <div className="news-card-info">
                         <h3>
-                          <a href="business-details.html">
+                          <a href="#">
                             How Youth Viral Diseases May The Year 2023
                           </a>
                         </h3>
@@ -575,7 +571,7 @@ const MyAccountcomp = (props) => {
                       </div>
                       <div className="news-card-info">
                         <h3>
-                          <a href="business-details.html">
+                          <a href="#">
                             Man Wearing Black Pullover Hoodie To Smoke
                           </a>
                         </h3>
@@ -596,7 +592,7 @@ const MyAccountcomp = (props) => {
                       </div>
                       <div className="news-card-info">
                         <h3>
-                          <a href="business-details.html">
+                          <a href="#">
                             First Prototype Flight Using Kinetic Launch System
                           </a>
                         </h3>
