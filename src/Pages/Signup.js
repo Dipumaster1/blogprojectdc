@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Firebase, { auth } from "../Firebase";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+
 const Signup = () => {
   const [obj, setobj] = useState({});
   const [btndisable, setbtndisable] = useState(false);
+  const navigate = useNavigate();
   const d = new Date();
   const date = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
 
@@ -50,6 +54,25 @@ const Signup = () => {
       setbtndisable(false);
     }
   }
+  function create(e) {
+    const result = jwtDecode(e.credential);
+    Firebase.child("Users")
+      .child(result.sub)
+      .set(
+        {
+          Email: result.email,
+          Name: result.name,
+          ProfileImage: { url: result.picture },
+        },
+        (err) => {
+          if (err) return alert("Something went wrong. Try again later");
+          else {
+            localStorage.setItem("Users", JSON.stringify(result.sub));
+            return navigate("/Blogs");
+          }
+        }
+      );
+  }
   return (
     <div className="login-wrap">
       <div className="login-bg">
@@ -74,10 +97,13 @@ const Signup = () => {
         <div className="login-form">
           <h3>Account-SignUp</h3>
           <div className="alt-login">
-            <a style={{ width: "100%" }} href="https://www.gmail.com/">
+            <GoogleOAuthProvider clientId="598939173507-nov0p5l9fb16gpr977rl81olsvr5apme.apps.googleusercontent.com">
+              <GoogleLogin useOneTap={true} onSuccess={create}></GoogleLogin>
+            </GoogleOAuthProvider>
+            {/* <a style={{ width: "100%" }} href="https://www.gmail.com/">
               <img src="assets/img/icons/google.svg" alt="Image" />
               Login With Google
-            </a>
+            </a> */}
           </div>
           <div className="text-center">
             <span className="or-text">OR</span>

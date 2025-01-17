@@ -4,13 +4,12 @@ import "firebase/compat/database";
 import "firebase/compat/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAAitd21vvjbhqOasJd4GUO-Be3aMICqeM",
-  authDomain: "dbblog-5f820.firebaseapp.com",
-  databaseURL: "https://dbblog-5f820-default-rtdb.firebaseio.com",
-  projectId: "dbblog-5f820",
-  storageBucket: "dbblog-5f820.appspot.com",
-  messagingSenderId: "366638761621",
-  appId: "1:366638761621:web:6bdefb13b1ea62560dbd9c",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 const app = firebase.initializeApp(firebaseConfig);
 export default app.database().ref();

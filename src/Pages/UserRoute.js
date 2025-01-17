@@ -6,6 +6,7 @@ import Firebase from "../Firebase";
 const UserRoute = () => {
   const [state, setstate] = useState([]);
   const [images, setimages] = useState([]);
+  const [alldata, setalldata] = useState([]);
   const [loading, setloading] = useState(false);
   const [users, setusers] = useState({});
   useEffect(() => {
@@ -15,11 +16,15 @@ const UserRoute = () => {
         let array = [];
         Object.keys(snap.val()).map((user) => {
           Object.keys(snap.val()[user]).map((key) => {
-            const object = snap.val()[user][key];
-            object.User = user;
-            array.push(object);
+            if (snap.val()[user][key].Status === "Active") {
+              const object = snap.val()[user][key];
+              object.BlogKey = key;
+              object.User = user;
+              array.push(object);
+            }
           });
         });
+        setalldata(array);
         array.sort((a, b) => b.Date - a.Date);
         const newarray = array.slice(0, 12);
         setstate(newarray);
@@ -34,6 +39,7 @@ const UserRoute = () => {
       } else {
         setstate([]);
         setimages([]);
+        setalldata([]);
       }
     });
     Firebase.child("Users").on("value", function (snap) {
@@ -49,6 +55,7 @@ const UserRoute = () => {
         fetchlatestimages: images,
         users: users,
         loading: loading,
+        alldata: alldata,
       }}
     >
       <Outlet />

@@ -1,10 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Firebase from "../../Firebase";
 
 const AuthorDetailsComp = ({ data, blogs, category }) => {
+  const navigate = useNavigate();
+  const [number, setnumber] = useState(0);
+  const allblogs = Object.keys(blogs).map((key) => {
+    const object = blogs[key];
+    object.BlogKey = key;
+    return object;
+  });
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const blogsPerPage = 2;
+  const indexOfLastblog = currentPage * blogsPerPage;
+  const indexOfFirstblog = indexOfLastblog - blogsPerPage;
+  const currentblogs = allblogs.slice(indexOfFirstblog, indexOfLastblog);
+
+  const totalPages = Math.ceil(allblogs.length / blogsPerPage);
+
   function getDate(date) {
     if (!date) return "-----";
     const d = new Date(date);
     return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  }
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("Authors"));
+    if (!token) return setnumber(0);
+    Firebase.child(`Comments/${token}`).on("value", function (snap) {
+      if (snap.val()) {
+        let result = 0;
+        Object.keys(snap.val()).map((key) => {
+          result = result + Object.keys(snap.val()[key]).length;
+        });
+        setnumber(result);
+      } else return setnumber(0);
+    });
+  }, []);
+  function getComments(key) {
+    let value = 0;
+    const token = JSON.parse(localStorage.getItem("Authors"));
+    if (!token) return (value = 0);
+    Firebase.child(`Comments/${token}/${key}`).on("value", function (snap) {
+      if (snap.val()) return (value = Object.keys(snap.val()).length);
+    });
+    return value;
   }
   return (
     <div>
@@ -45,7 +85,7 @@ const AuthorDetailsComp = ({ data, blogs, category }) => {
             </ul> */}
                 <div className="author-stat">
                   {blogs && <span>{Object.keys(blogs).length} Blogs</span>}
-                  <span>191 Comments</span>
+                  <span>{number} Comments</span>
                 </div>
               </div>
             </div>
@@ -60,80 +100,119 @@ const AuthorDetailsComp = ({ data, blogs, category }) => {
                 <h2>Posts</h2>
               </div>
               <div className="popular-news-wrap">
-                {blogs &&
-                  Object.keys(blogs)
-                    .reverse()
-                    .map((key, index) => (
-                      <div key={index} className="news-card-five">
-                        <div className="news-card-img">
-                          <img
-                            style={{ height: "180px" }}
-                            loading="lazy"
-                            src={
-                              blogs[key]?.HeadingImage?.url
-                                ? blogs[key]?.HeadingImage.url
-                                : "assets/img/news/news-70.webp"
-                            }
-                            alt="Image"
-                          />
-                          <a href="#" className="news-cat">
-                            {blogs[key]?.Category}
-                          </a>
-                        </div>
-                        <div className="news-card-info">
-                          <h3>
-                            <a href="#">{blogs[key]?.Title}</a>
-                          </h3>
-                          <p>{blogs[key]?.Description?.slice(0, 100)}</p>
-                          <ul className="news-metainfo list-style">
-                            <li className="author">
-                              <span className="author-img">
-                                <img
-                                  src={
-                                    data?.ProfileImage?.url
-                                      ? data?.ProfileImage?.url
-                                      : "assets/img/Bharat.png"
-                                  }
-                                  alt="Image"
-                                />
-                              </span>
-                              <a href="#">{blogs[key]?.Author}</a>
-                            </li>
-                            <li>
-                              <i className="fi fi-rr-calendar-minus" />
-                              <a href="#">{getDate(blogs[key]?.Date)}</a>
-                            </li>
-                            <li>
-                              <i className="fi fi-rr-clock-three" />
-                              10 Comments
-                            </li>
-                          </ul>
-                        </div>
+                {
+                  //   blogs && Object.keys(blogs).reverse().map((key,index)=><div key={index} className="news-card-five">
+                  //   <div onClick={()=>{localStorage.setItem("BlogDetails",JSON.stringify(key)); navigate("/BlogDetails")}} className="news-card-img">
+                  //     <img style={{height:"180px"}} loading='lazy' src={blogs[key]?.HeadingImage?.url?blogs[key]?.HeadingImage.url:"assets/img/news/news-70.webp"} alt="Image" />
+                  //     <a href="#" className="news-cat">{blogs[key]?.Category}</a>
+                  //   </div>
+                  //   <div className="news-card-info">
+                  //     <h3><a onClick={()=>{localStorage.setItem("BlogDetails",JSON.stringify(key)); navigate("/BlogDetails")}}>{blogs[key]?.Title}</a></h3>
+                  //     <p>{blogs[key]?.Description?.slice(0,100)}</p>
+                  //     <ul className="news-metainfo list-style">
+                  //       <li className="author">
+                  //         <span className="author-img">
+                  //           <img src={data?.ProfileImage?.url?data?.ProfileImage?.url:"assets/img/Bharat.png"} alt="Image" />
+                  //         </span>
+                  //         <a href="#">{blogs[key]?.Author}</a>
+                  //       </li>
+                  //       <li><i className="fi fi-rr-calendar-minus"/><a href="#">{getDate(blogs[key]?.Date)}</a></li>
+                  //       <li><i className="fi fi-rr-clock-three"/>{getComments(key)} Comments</li>
+                  //     </ul>
+                  //   </div>
+                  // </div>)
+                }
+                {currentblogs.length > 0 &&
+                  currentblogs.map((obj, index) => (
+                    <div key={index} className="news-card-five">
+                      <div
+                        onClick={() => {
+                          localStorage.setItem(
+                            "BlogDetails",
+                            JSON.stringify(obj.BlogKey)
+                          );
+                          navigate("/BlogDetails");
+                        }}
+                        className="news-card-img"
+                      >
+                        <img
+                          style={{ height: "180px" }}
+                          loading="lazy"
+                          src={
+                            obj?.HeadingImage?.url
+                              ? obj?.HeadingImage.url
+                              : "assets/img/news/news-70.webp"
+                          }
+                          alt="Image"
+                        />
+                        <a href="#" className="news-cat">
+                          {obj?.Category}
+                        </a>
                       </div>
-                    ))}
+                      <div className="news-card-info">
+                        <h3>
+                          <a
+                            onClick={() => {
+                              localStorage.setItem(
+                                "BlogDetails",
+                                JSON.stringify(obj.BlogKey)
+                              );
+                              navigate("/BlogDetails");
+                            }}
+                          >
+                            {obj?.Title}
+                          </a>
+                        </h3>
+                        <p>{obj?.Description?.slice(0, 100)}</p>
+                        <ul className="news-metainfo list-style">
+                          <li className="author">
+                            <span className="author-img">
+                              <img
+                                src={
+                                  data?.ProfileImage?.url
+                                    ? data?.ProfileImage?.url
+                                    : "assets/img/Bharat.png"
+                                }
+                                alt="Image"
+                              />
+                            </span>
+                            <a href="#">{obj?.Author}</a>
+                          </li>
+                          <li>
+                            <i className="fi fi-rr-calendar-minus" />
+                            <a href="#">{getDate(obj?.Date)}</a>
+                          </li>
+                          <li>
+                            <i className="fi fi-rr-clock-three" />
+                            {getComments(obj?.BlogKey)} Comments
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  ))}
               </div>
               <ul className="page-nav list-style text-center mt-5">
-                <li>
-                  <a href="#">
-                    <i className="flaticon-arrow-left" />
-                  </a>
-                </li>
-                <li>
-                  <a className="active" href="#">
-                    01
-                  </a>
-                </li>
-                <li>
-                  <a href="#">02</a>
-                </li>
-                <li>
-                  <a href="#">03</a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="flaticon-arrow-right" />
-                  </a>
-                </li>
+                {currentPage !== 1 && (
+                  <li onClick={() => setCurrentPage(currentPage - 1)}>
+                    <a>
+                      <i className="flaticon-arrow-left" />
+                    </a>
+                  </li>
+                )}
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <li key={index} onClick={() => setCurrentPage(index + 1)}>
+                    <a className={currentPage === index + 1 ? "active" : ""}>
+                      {index + 1}
+                    </a>
+                  </li>
+                ))}
+                {currentPage !== totalPages && (
+                  <li onClick={() => setCurrentPage(currentPage + 1)}>
+                    <a>
+                      <i className="flaticon-arrow-right" />
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
             <div className="col-lg-4">

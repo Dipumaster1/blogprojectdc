@@ -15,6 +15,12 @@
     display: none;
   }
 }
+.login-form h3 {
+  color: rgb(84, 236, 84);
+}
+.single-terms h2 {
+  color: rgb(84, 236, 84);
+}
 .myimages:hover {
   background-color: #e93314;
   cursor: pointer;

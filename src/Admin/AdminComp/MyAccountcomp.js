@@ -406,64 +406,43 @@ const MyAccountcomp = (props) => {
                   <ul className="category-widget list-style">
                     <li>
                       <a href="#">
-                        <img
-                          src="assets/img/icons/arrow-right.svg"
-                          alt="Image"
-                        />
+                        <i className="flaticon-right-arrow"></i>
                         Celebration <span>(6)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img
-                          src="assets/img/icons/arrow-right.svg"
-                          alt="Image"
-                        />
+                        <i className="flaticon-right-arrow"></i>
                         Culture<span>(3)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img
-                          src="assets/img/icons/arrow-right.svg"
-                          alt="Image"
-                        />
+                        <i className="flaticon-right-arrow"></i>
                         Fashion<span>(2)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img
-                          src="assets/img/icons/arrow-right.svg"
-                          alt="Image"
-                        />
+                        <i className="flaticon-right-arrow"></i>
                         Inspiration<span>(8)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img
-                          src="assets/img/icons/arrow-right.svg"
-                          alt="Image"
-                        />
+                        <i className="flaticon-right-arrow"></i>
                         Lifestyle<span>(6)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img
-                          src="assets/img/icons/arrow-right.svg"
-                          alt="Image"
-                        />
+                        <i className="flaticon-right-arrow"></i>
                         Politics<span>(2)</span>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img
-                          src="assets/img/icons/arrow-right.svg"
-                          alt="Image"
-                        />
+                        <i className="flaticon-right-arrow"></i>
                         Trending<span>(4)</span>
                       </a>
                     </li>
